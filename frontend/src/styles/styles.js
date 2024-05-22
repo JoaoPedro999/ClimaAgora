@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 
+  //texto da localização
   locationName: {
     fontSize: 18,
     fontWeight: "bold",
@@ -271,6 +272,7 @@ const styles = StyleSheet.create({
     margin: 10,
   },
 
+  //Estilização do botão de login
   TouchableOpacity: {
     padding: 15,
     borderRadius: 25,
@@ -280,8 +282,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-
-  txt: {},
 });
 
 export default styles;
