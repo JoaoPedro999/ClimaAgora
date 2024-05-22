@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 20,
     padding: 30,
-    height: 200,
+    height: 280,
     backgroundColor: "#B6D6F2",
     borderRadius: 24,
     padding: 15,
@@ -198,39 +198,10 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
 
+  //estilização das imagens
   wimage: {
-    width: 150,
-    height: 100,
-  },
-
-  //estilização geral pagina de login e cadastro
-  general: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#ABC7EB",
-  },
-
-  //estilização do card de login e cadastro
-  card: {
-    width: "80%",
-    padding: 20,
-    backgroundColor: "#ffffff33",
-    borderRadius: 30,
-    justifyContent: "center",
-    alignItems: "center",
-    position: "relative",
-    borderWidth: 1,
-    borderColor: "#000",
-  },
-
-  //titulo das páginas login e cadastro
-  Title: {
-    fontSize: 40,
-    textTransform: "uppercase",
-    letterSpacing: 1,
-    textAlign: "center",
-    marginTop: 40,
+    width: 180,
+    height: 150,
   },
 
   areaInputs: {
@@ -245,19 +216,6 @@ const styles = StyleSheet.create({
     left: "50%",
     marginLeft: -30,
     zIndex: 1,
-  },
-
-  //imagem para usuario
-  icon: {
-    width: 30,
-    height: 30,
-  },
-
-  //imagem de cadeado
-  iconsenha: {
-    width: 30,
-    height: 30,
-    resizeMode: "cover",
   },
 
   //config do input

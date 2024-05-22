@@ -110,7 +110,7 @@ const WeatherComponent = ({ addLocation }) => {
       <View key={index} style={styles.forecastItem}>
         <Image
           source={WeatherImage(forecast.condition)}
-          style={{ width: 24, height: 24, marginRight: 10 }}
+          style={{ width: 40, height: 40, marginRight: 10 }}
         />
         <Text style={styles.forecastDate}>{forecast.date}</Text>
         <Text style={[styles.forecastTemp, { marginLeft: 15 }]}>
