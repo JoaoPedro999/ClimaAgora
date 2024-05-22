@@ -8,8 +8,7 @@ import ClimaAgora from "./src/pages/ClimaAgora";
 import axios from "axios";
 import LocationSaved from "./src/components/LocationSaved";
 import Homepage from "./src/pages/Home";
-import Login from "./src/pages/Login";
-import Cadastro from "./src/pages/Cadastro";
+
 import { SimpleLineIcons } from "@expo/vector-icons";
 
 const Drawer = createDrawerNavigator();
@@ -84,6 +83,7 @@ export default function App() {
             options={{
               headerStyle: { backgroundColor: "#ABC7EB", opacity: 0.9 },
               headerTintColor: "#DFE9F5",
+              title: <SimpleLineIcons name="login" size={24} color="black" />,
             }}
           />
           <Drawer.Screen
