@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { View } from "react-native";
 import styles from "./src/styles/styles";
+import { StyleSheet } from "react-native";
 import ClimaAgora from "./src/pages/ClimaAgora";
 import axios from "axios";
 import LocationSaved from "./src/components/LocationSaved";
@@ -73,7 +74,7 @@ export default function App() {
             options={{
               headerStyle: { backgroundColor: "#ABC7EB", opacity: 0.9 },
               headerTintColor: "#DFE9F5",
-              title: "Inserir Localização 📌",
+              title: <Entypo name="location" size={24} color="black" />,
             }}
             initialParams={{ addLocation }}
           />
@@ -83,7 +84,6 @@ export default function App() {
             options={{
               headerStyle: { backgroundColor: "#ABC7EB", opacity: 0.9 },
               headerTintColor: "#DFE9F5",
-              title: "Login" <SimpleLineIcons name="login" size={24} color="black" />
             }}
           />
           <Drawer.Screen
