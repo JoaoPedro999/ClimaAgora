@@ -54,7 +54,6 @@ const styles = StyleSheet.create({
   },
 
   forecastContainer: {
-    alignItems: "center",
     justifyContent: "space-between",
     marginBottom: 20,
     padding: 30,

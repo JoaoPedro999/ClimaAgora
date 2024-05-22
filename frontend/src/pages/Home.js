@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Image, ScrollView, Plataform } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  ScrollView,
+  TextInput,
+  ActivityIndicator,
+} from "react-native";
+import * as Location from "expo-location";
 import axios from "axios";
 import styles from "../styles/styles";
 import moment from "moment";
@@ -9,29 +17,27 @@ const Homepage = () => {
   const [location, setLocation] = useState("Nova Odessa");
   const [forecastData, setForecastData] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
         setErrorMsg("Permission to access location was denied");
+        setLoading(false);
         return;
       }
 
       let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
-      console.log(location);
+      const { latitude, longitude } = location.coords;
+      setLocation(`${latitude},${longitude}`);
+      setLoading(false);
     })();
   }, []);
 
-  let text = "Waiting..";
-  if (errorMsg) {
-    text = errorMsg;
-  } else if (location) {
-    text = JSON.stringify(location);
-  }
-
   useEffect(() => {
+    if (!location || typeof location !== "string") return;
+
     const fetchWeatherData = async () => {
       try {
         const response = await axios.get(
@@ -72,7 +78,6 @@ const Homepage = () => {
     fetchForecastData();
   }, [location]);
 
-  //Trocar imagem condição
   const WeatherImage = (condition) => {
     switch (condition) {
       case "Clouds":
@@ -94,13 +99,12 @@ const Homepage = () => {
   const renderForecast = () => {
     if (!forecastData) return null;
 
-    // Agrupar previsões por dia
     const groupedForecasts = {};
     forecastData.list.forEach((forecast) => {
       const date = moment(forecast.dt_txt).format("YYYY-MM-DD");
       if (!groupedForecasts[date]) {
         groupedForecasts[date] = {
-          date: moment(forecast.dt_txt).format("dddd"), // Dia da semana
+          date: moment(forecast.dt_txt).format("dddd"),
           minTemp: forecast.main.temp,
           maxTemp: forecast.main.temp,
           condition: forecast.weather[0].main,
@@ -115,10 +119,8 @@ const Homepage = () => {
       }
     });
 
-    // Transformar objeto em array
     const forecasts = Object.values(groupedForecasts);
 
-    // Exibir a previsão para os próximos dias
     return forecasts.map((forecast, index) => (
       <View key={index} style={styles.forecastItem}>
         <Image
@@ -133,6 +135,14 @@ const Homepage = () => {
     ));
   };
 
+  if (loading) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollContainer}>
@@ -140,14 +150,12 @@ const Homepage = () => {
           <View style={styles.thirdcontainer}>
             <Text style={styles.city}>{location}</Text>
             <View style={styles.secondaryContainer}>
-              {/* exibindo dados principais */}
               <View style={styles.temp}>
                 <Text style={styles.temp}>
                   {weatherData.main.temp.toFixed()}°C
                 </Text>
                 <Text style={styles.cond}>{weatherData.weather[0].main}</Text>
               </View>
-
               <Image
                 source={WeatherImage(weatherData.weather[0].main)}
                 style={styles.wimage}
@@ -155,7 +163,6 @@ const Homepage = () => {
             </View>
           </View>
         )}
-        {/* Exibindo umidade do ar e velocidade do vento */}
         {weatherData && (
           <View style={styles.FlatList}>
             <View style={styles.umidade}>
@@ -168,12 +175,9 @@ const Homepage = () => {
             </View>
           </View>
         )}
-
-        {/* Exibindo previsões futuras */}
         <Text style={styles.forecastTitle}>
           Previsão para os próximos dias:
         </Text>
-
         <View style={styles.forecastContainer}>{renderForecast()}</View>
       </ScrollView>
     </View>

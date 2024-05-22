@@ -3,13 +3,14 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { View } from "react-native";
 import styles from "./src/styles/styles";
-import { StyleSheet } from "react-native";
 import ClimaAgora from "./src/pages/ClimaAgora";
 import axios from "axios";
 import LocationSaved from "./src/components/LocationSaved";
 import Homepage from "./src/pages/Home";
-
+// Importando os icones
 import { SimpleLineIcons } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
 const Drawer = createDrawerNavigator();
 
@@ -64,36 +65,25 @@ export default function App() {
             options={{
               headerStyle: { backgroundColor: "#ABC7EB", opacity: 0.9 },
               headerTintColor: "#DFE9F5",
-              title: "Home 🏠",
+              title: "Home",
+              headerTitle: () => (
+                <AntDesign name="home" size={24} color="black" />
+              ),
             }}
           />
+
           <Drawer.Screen
             name="ClimaAgora"
             component={ClimaAgora}
             options={{
               headerStyle: { backgroundColor: "#ABC7EB", opacity: 0.9 },
               headerTintColor: "#DFE9F5",
-              title: <Entypo name="location" size={24} color="black" />,
+              title: "Salve sua Localização",
+              headerTitle: () => (
+                <Entypo name="location" size={24} color="black" />
+              ),
             }}
             initialParams={{ addLocation }}
-          />
-          <Drawer.Screen
-            name="Login"
-            component={Login}
-            options={{
-              headerStyle: { backgroundColor: "#ABC7EB", opacity: 0.9 },
-              headerTintColor: "#DFE9F5",
-              title: <SimpleLineIcons name="login" size={24} color="black" />,
-            }}
-          />
-          <Drawer.Screen
-            name="Cadastro"
-            component={Cadastro}
-            options={{
-              headerStyle: { backgroundColor: "#ABC7EB", opacity: 0.9 },
-              headerTintColor: "#DFE9F5",
-              title: "Cadastre-se 😏",
-            }}
           />
         </Drawer.Navigator>
       </NavigationContainer>
