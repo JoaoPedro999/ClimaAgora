@@ -4,6 +4,30 @@ import axios from "axios";
 import BtnComponent from "./ButtonComponent";
 import styles from "../styles/styles";
 import moment from "moment";
+import { database } from "../../firebaseConfig"; // Importar a configuração do Firebase
+import { ref, push, set } from "firebase/database"; // Importar as funções necessárias
+
+const saveLocation = async () => {
+  try {
+    const newLocationRef = push(ref(database, 'locations'));
+    await set(newLocationRef, {
+      name: location, // String
+      weatherData: {  // Objeto
+        main: {
+          temp: weatherData.main.temp, // Number
+          humidity: weatherData.main.humidity, // Number
+        },
+        weather: weatherData.weather.map(condition => ({
+          main: condition.main, // String
+          description: condition.description, // String
+        })),
+      },
+    });
+    addLocation(location); // Atualiza o estado local
+  } catch (error) {
+    console.error("Erro ao salvar a localização:", error);
+  }
+};
 
 const WeatherComponent = ({ addLocation }) => {
   const [weatherData, setWeatherData] = useState(null);
@@ -53,10 +77,6 @@ const WeatherComponent = ({ addLocation }) => {
 
   const LocationChange = (text) => {
     setLocation(text);
-  };
-
-  const saveLocation = () => {
-    addLocation(location);
   };
 
   //Trocar imagem condição
