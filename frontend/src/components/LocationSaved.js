@@ -1,8 +1,6 @@
-// src/components/LocationSaved.js
-
 import React, { useEffect, useState } from "react";
-import { ref, onValue } from "firebase/database"; // Importar as funções necessárias do Firebase
-import { database } from "../../firebaseConfig"; // Importar a configuração do Firebase
+import { ref, onValue } from "firebase/database"; 
+import { database } from "../../firebaseConfig"; 
 import {
   DrawerContentScrollView,
   DrawerItemList,
@@ -32,7 +30,7 @@ const LocationSaved = (props) => {
                 {
                   params: {
                     q: location.name,
-                    appid: "YOUR_OPENWEATHERMAP_API_KEY",
+                    appid: "f389eea64f8256b7f985d868e3a3de38",
                     units: "metric",
                   },
                 }

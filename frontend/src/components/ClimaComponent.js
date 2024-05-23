@@ -4,26 +4,26 @@ import axios from "axios";
 import BtnComponent from "./ButtonComponent";
 import styles from "../styles/styles";
 import moment from "moment";
-import { database } from "../../firebaseConfig"; // Importar a configuração do Firebase
-import { ref, push, set } from "firebase/database"; // Importar as funções necessárias
+import { database } from "../../firebaseConfig"; 
+import { ref, push, set } from "firebase/database"; 
 
 const saveLocation = async () => {
   try {
     const newLocationRef = push(ref(database, 'locations'));
     await set(newLocationRef, {
-      name: location, // String
-      weatherData: {  // Objeto
+      name: location, 
+      weatherData: {  
         main: {
-          temp: weatherData.main.temp, // Number
-          humidity: weatherData.main.humidity, // Number
+          temp: weatherData.main.temp, 
+          humidity: weatherData.main.humidity, 
         },
         weather: weatherData.weather.map(condition => ({
-          main: condition.main, // String
-          description: condition.description, // String
+          main: condition.main, 
+          description: condition.description, 
         })),
       },
     });
-    addLocation(location); // Atualiza o estado local
+    addLocation(location); 
   } catch (error) {
     console.error("Erro ao salvar a localização:", error);
   }
