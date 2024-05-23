@@ -1,15 +1,58 @@
-// LocationSaved.js
+// src/components/LocationSaved.js
 
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { ref, onValue } from "firebase/database"; // Importar as funções necessárias do Firebase
+import { database } from "../../firebaseConfig"; // Importar a configuração do Firebase
 import {
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
 import { View, Text, Image } from "react-native";
 import styles from "../styles/styles";
+import axios from "axios";
 
-const LocationSaved = ({ savedLocations, ...props }) => {
-  // Função para selecionar o ícone do clima
+const LocationSaved = (props) => {
+  const [savedLocations, setSavedLocations] = useState([]);
+
+  useEffect(() => {
+    const fetchLocations = async () => {
+      try {
+        const locationsRef = ref(database, 'locations');
+        onValue(locationsRef, async (snapshot) => {
+          const locations = [];
+          snapshot.forEach(childSnapshot => {
+            const location = childSnapshot.val();
+            locations.push({ ...location, id: childSnapshot.key });
+          });
+
+          const updatedLocations = await Promise.all(
+            locations.map(async (location) => {
+              const response = await axios.get(
+                "https://api.openweathermap.org/data/2.5/weather",
+                {
+                  params: {
+                    q: location.name,
+                    appid: "YOUR_OPENWEATHERMAP_API_KEY",
+                    units: "metric",
+                  },
+                }
+              );
+              return {
+                ...location,
+                weatherData: response.data,
+              };
+            })
+          );
+          setSavedLocations(updatedLocations);
+        });
+      } catch (error) {
+        console.error("Erro ao buscar localizações salvas:", error);
+      }
+    };
+
+    fetchLocations();
+  }, []);
+
   const getWeatherIcon = (condition) => {
     switch (condition) {
       case "Clouds":
