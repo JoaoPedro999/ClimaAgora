@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { ref, onValue } from "firebase/database"; 
-import { database } from "../../firebaseConfig"; 
+import { ref, onValue } from "firebase/database";
+import { database } from "../services/firebaseConfig";
 import {
   DrawerContentScrollView,
   DrawerItemList,
@@ -15,10 +15,10 @@ const LocationSaved = (props) => {
   useEffect(() => {
     const fetchLocations = async () => {
       try {
-        const locationsRef = ref(database, 'locations');
+        const locationsRef = ref(database, "locations");
         onValue(locationsRef, async (snapshot) => {
           const locations = [];
-          snapshot.forEach(childSnapshot => {
+          snapshot.forEach((childSnapshot) => {
             const location = childSnapshot.val();
             locations.push({ ...location, id: childSnapshot.key });
           });

@@ -1,7 +1,5 @@
-
 import { initializeApp } from "firebase/app";
-import { getDatabase } from "firebase/database";
-
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyByJrzpnFF6-KCp5MApVYh7vuXCo4xCZI8",
@@ -11,11 +9,10 @@ const firebaseConfig = {
   storageBucket: "climaagora-28d11.appspot.com",
   messagingSenderId: "1090079955384",
   appId: "1:1090079955384:web:b003cd2d82540b3469174d",
-  measurementId: "G-LE37SE0J30"
+  measurementId: "G-LE37SE0J30",
 };
 
-
 const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
+const db = getFirestore(app);
 
-export { database };
+export { db };
