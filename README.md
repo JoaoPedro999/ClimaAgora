@@ -22,9 +22,9 @@ O Clima Agora é uma aplicação que oferece informações meteorológicas em te
    - Receba automaticamente informações meteorológicas precisas da sua região.
 
 ## Tecnologias Utilizadas
-- Linguagem de Programação: [Inserir aqui]
-- Frameworks ou Bibliotecas: [Inserir aqui]
-- APIs Utilizadas: [Inserir aqui]
+- Linguagem de Programação: Javascript.
+- Frameworks ou Bibliotecas: React Native.
+- APIs Utilizadas: OpenWeatherMap, Firebase.
 
 ## Autores
 João Pedro Araújo Teixeira
