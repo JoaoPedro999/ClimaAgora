@@ -23,9 +23,6 @@ const styles = StyleSheet.create({
   },
 
   thirdcontainer: {
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 20,
     padding: 30,
     height: "32%",
     backgroundColor: "#85AEDD",
@@ -34,6 +31,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 15,
     margin: 20,
+  },
+
+  dhead: {
+    backgroundColor: "black",
+    alignItems: "center",
+    justifyContent: "center",
     marginBottom: 10,
   },
 

@@ -10,6 +10,7 @@ import ClimaAgora from "./src/pages/ClimaAgora";
 import axios from "axios";
 import LocationSaved from "./src/components/LocationSaved";
 import Homepage from "./src/pages/Home";
+import DrawerHead from "./src/components/DrawerHead";
 
 const Drawer = createDrawerNavigator();
 
@@ -45,6 +46,7 @@ export default function App() {
           initialRouteName="Homepage"
           drawerContent={(props) => (
             <View>
+              <DrawerHead />
               {/* Renderize o componente LocationSaved */}
               <LocationSaved {...props} savedLocations={savedLocations} />
             </View>
