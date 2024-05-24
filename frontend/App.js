@@ -2,15 +2,14 @@ import React, { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { View } from "react-native";
+import { SimpleLineIcons } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 import styles from "./src/styles/styles";
 import ClimaAgora from "./src/pages/ClimaAgora";
 import axios from "axios";
 import LocationSaved from "./src/components/LocationSaved";
 import Homepage from "./src/pages/Home";
-// Importando os icones
-import { SimpleLineIcons } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
 
 const Drawer = createDrawerNavigator();
 
@@ -67,7 +66,7 @@ export default function App() {
               headerTintColor: "#DFE9F5",
               title: "Home",
               headerTitle: () => (
-                <AntDesign name="home" size={24} color="black" />
+                <AntDesign name="home" size={24} color="white" />
               ),
             }}
           />
@@ -80,7 +79,7 @@ export default function App() {
               headerTintColor: "#DFE9F5",
               title: "Salve sua Localização",
               headerTitle: () => (
-                <Entypo name="location" size={24} color="black" />
+                <Entypo name="location" size={24} color="white" />
               ),
             }}
             initialParams={{ addLocation }}

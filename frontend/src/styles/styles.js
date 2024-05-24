@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#555",
   },
+
   weatherTitle: {
     fontSize: 16,
   },
@@ -191,6 +192,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
 
+  //Estilização para a area dos cards
   FlatList: {
     flexDirection: "row",
     alignItems: "center",
