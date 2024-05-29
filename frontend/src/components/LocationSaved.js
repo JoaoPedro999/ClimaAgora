@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../services/firebaseConfig";
 import {
   DrawerContentScrollView,
@@ -8,11 +8,22 @@ import {
 import { View, Text, Image } from "react-native";
 import styles from "../styles/styles";
 import axios from "axios";
+import BtnComponent from "./ButtonComponent";
 
 const LocationSaved = (props) => {
   const [savedLocations, setSavedLocations] = useState([]);
 
-  // Função da API e salvar locais
+  const deleteLocation = async (locationId) => {
+    try {
+      await deleteDoc(doc(db, "locations", locationId));
+      setSavedLocations(
+        savedLocations.filter((location) => location.id !== locationId)
+      );
+    } catch (error) {
+      console.error("Erro ao excluir a localização:", error);
+    }
+  };
+
   useEffect(() => {
     const fetchLocations = async () => {
       try {
@@ -62,7 +73,6 @@ const LocationSaved = (props) => {
     fetchLocations();
   }, []);
 
-  // Definindo qual imagem aparece de acordo com o tempo
   const getWeatherIcon = (condition) => {
     switch (condition) {
       case "Clouds":
@@ -85,10 +95,8 @@ const LocationSaved = (props) => {
   };
 
   return (
-    //Drawer e navegação de rotas
     <DrawerContentScrollView {...props}>
       <DrawerItemList {...props} />
-      {/* Mostrar as localizações salvas dentro do drawer */}
       <Text style={styles.drawerSection}>Localizações Salvas</Text>
       {savedLocations.length === 0 ? (
         <Text style={styles.noLocationsText}>Nenhuma localização salva</Text>
@@ -108,6 +116,10 @@ const LocationSaved = (props) => {
                 <Text style={styles.weatherCond}>
                   {location.weatherData.weather[0].main}
                 </Text>
+
+                <BtnComponent onPress={() => deleteLocation(location.id)}>
+                  <Text>Excluir</Text>
+                </BtnComponent>
               </View>
             ) : (
               <Text style={styles.loadingText}>
