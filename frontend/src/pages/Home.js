@@ -82,7 +82,10 @@ const Homepage = () => {
       case "Thunderstorm":
         return require("../assets/images/Thunderstorm.png");
       case "Haze":
+        return require("../assets/images/Haze.png");
       case "Fog":
+        return require("../assets/images/Haze.png");
+      case "Mist":
         return require("../assets/images/Haze.png");
       default:
         return null;
@@ -143,7 +146,7 @@ const Homepage = () => {
           <View style={styles.thirdcontainer}>
             <Text style={styles.city}>{location}</Text>
             <View style={styles.secondaryContainer}>
-              <View style={styles.temp}>
+              <View style={styles.tempContainer}>
                 <Text style={styles.temp}>
                   {weatherData.main.temp.toFixed()}°C
                 </Text>

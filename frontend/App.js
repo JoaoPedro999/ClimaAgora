@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerItem,
+} from "@react-navigation/drawer";
 import { View } from "react-native";
-import { SimpleLineIcons } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, Entypo } from "@expo/vector-icons";
+import axios from "axios";
 import styles from "./src/styles/styles";
 import ClimaAgora from "./src/pages/ClimaAgora";
-import axios from "axios";
 import LocationSaved from "./src/components/LocationSaved";
 import Homepage from "./src/pages/Home";
-import DrawerHead from "./src/components/DrawerHead";
 
 const Drawer = createDrawerNavigator();
 
@@ -39,49 +40,46 @@ export default function App() {
     }
   };
 
+  const CustomDrawerContent = (props) => (
+    <DrawerContentScrollView {...props}>
+      <LocationSaved {...props} savedLocations={savedLocations} />
+    </DrawerContentScrollView>
+  );
+
   return (
     <View style={styles.container}>
       <NavigationContainer>
         <Drawer.Navigator
           initialRouteName="Homepage"
-          drawerContent={(props) => (
-            <View>
-              <DrawerHead />
-              {/* Renderize o componente LocationSaved */}
-              <LocationSaved {...props} savedLocations={savedLocations} />
-            </View>
-          )}
-          drawerStyle={{ backgroundColor: "#DFE9F5" }}
-          drawerContentOptions={{
-            backgroundColor: "#DFE9F5",
-            activeBackgroundColor: "#DFE9F5",
-            activeTintColor: "white",
-            inactiveBackgroundColor: "#DFE9F5",
-            inactiveTintColor: "black",
+          drawerContent={(props) => <CustomDrawerContent {...props} />}
+          screenOptions={{
+            drawerStyle: {
+              backgroundColor: "#DFE9F5",
+            },
+            headerStyle: {
+              backgroundColor: "#ABC7EB",
+              opacity: 0.9,
+            },
+            headerTintColor: "#DFE9F5",
           }}
         >
           <Drawer.Screen
             name="Homepage"
             component={Homepage}
             options={{
-              headerStyle: { backgroundColor: "#ABC7EB", opacity: 0.9 },
-              headerTintColor: "#DFE9F5",
               title: "Home",
-              headerTitle: () => (
-                <AntDesign name="home" size={24} color="white" />
+              drawerIcon: ({ color, size }) => (
+                <AntDesign name="home" size={size} color={color} />
               ),
             }}
           />
-
           <Drawer.Screen
             name="ClimaAgora"
             component={ClimaAgora}
             options={{
-              headerStyle: { backgroundColor: "#ABC7EB", opacity: 0.9 },
-              headerTintColor: "#DFE9F5",
               title: "Salve sua Localização",
-              headerTitle: () => (
-                <Entypo name="location" size={24} color="white" />
+              drawerIcon: ({ color, size }) => (
+                <Entypo name="location" size={size} color={color} />
               ),
             }}
             initialParams={{ addLocation }}

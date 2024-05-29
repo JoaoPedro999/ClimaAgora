@@ -50,7 +50,7 @@ const WeatherComponent = ({ addLocation }) => {
           {
             params: {
               q: location,
-              appid: "YOUR_API_KEY",
+              appid: "f389eea64f8256b7f985d868e3a3de38",
               units: "metric",
             },
           }
@@ -80,7 +80,10 @@ const WeatherComponent = ({ addLocation }) => {
       case "Thunderstorm":
         return require("../assets/images/Thunderstorm.png");
       case "Haze":
+        return require("../assets/images/Haze.png");
       case "Fog":
+        return require("../assets/images/Haze.png");
+      case "Mist":
         return require("../assets/images/Haze.png");
       default:
         return null;
@@ -142,7 +145,7 @@ const WeatherComponent = ({ addLocation }) => {
           <View style={styles.thirdcontainer}>
             <Text style={styles.city}>{location}</Text>
             <View style={styles.secondaryContainer}>
-              <View style={styles.temp}>
+              <View style={styles.tempContainer}>
                 <Text style={styles.temp}>
                   {weatherData.main.temp.toFixed()}°C
                 </Text>

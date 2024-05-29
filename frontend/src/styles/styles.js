@@ -14,30 +14,25 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
 
+  //Localizações salvas
   forthContainer: {
     backgroundColor: "#B6D6F2",
-    borderRadius: 10,
-    padding: 10,
+    borderRadius: 8,
+    padding: 8,
     marginVertical: 5,
     marginHorizontal: 10,
   },
 
+  //Container Home/Salve sua Localização
   thirdcontainer: {
     padding: 30,
-    height: "32%",
+    height: "30%",
     backgroundColor: "#85AEDD",
     borderRadius: 24,
     alignItems: "center",
     justifyContent: "center",
     padding: 15,
     margin: 20,
-  },
-
-  dhead: {
-    backgroundColor: "black",
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 10,
   },
 
   //texto da localização
@@ -57,6 +52,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 
+  //Tabela "Previsão para os próximos dias"
   forecastContainer: {
     justifyContent: "space-between",
     marginBottom: 20,
@@ -68,26 +64,16 @@ const styles = StyleSheet.create({
     margin: 20,
   },
 
-  forecastItem: {
-    backgroundColor: "#fff",
-    justifyContent: "space-between",
-    borderRadius: 10,
-    padding: 10,
-    margin: 20,
-  },
-
+  //Texto dentro da tabela "Previsão para os próximos dias"
   forecastDate: {
-    fontSize: 18,
+    fontSize: 15,
     fontWeight: "bold",
     marginBottom: 5,
   },
+
   forecastTemp: {
     fontSize: 16,
     marginBottom: 5,
-  },
-  forecastCond: {
-    fontSize: 14,
-    color: "#555",
   },
 
   forecastItem: {
@@ -95,6 +81,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
 
+  //Texto e container "Previsão para os próximos dias"
   forecastTitle: {
     textAlign: "center",
     marginBottom: 5,
@@ -106,6 +93,11 @@ const styles = StyleSheet.create({
     margin: 20,
     fontSize: 18,
     marginBottom: 5,
+  },
+
+  tempContainer: {
+    alignItems: "flex-start",
+    left: "5%",
   },
 
   //estilização do texto que mostra a temperatura em graus

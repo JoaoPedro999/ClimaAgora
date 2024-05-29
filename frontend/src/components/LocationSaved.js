@@ -72,7 +72,10 @@ const LocationSaved = (props) => {
       case "Thunderstorm":
         return require("../assets/images/Thunderstorm.png");
       case "Haze":
+        return require("../assets/images/Haze.png");
       case "Fog":
+        return require("../assets/images/Haze.png");
+      case "Mist":
         return require("../assets/images/Haze.png");
       default:
         return null;
