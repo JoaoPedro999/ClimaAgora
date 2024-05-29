@@ -8,7 +8,6 @@ const styles = StyleSheet.create({
 
   secondaryContainer: {
     alignItems: "center",
-    justifyContent: "center",
     marginBottom: 20,
     padding: 30,
     flexDirection: "row",
@@ -86,7 +85,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 5,
     padding: 30,
-    height: 50,
+    height: 60,
     backgroundColor: "#B6D6F2",
     borderRadius: 24,
     padding: 15,
@@ -94,7 +93,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 5,
   },
-
+  //Texto do clima e grau
   tempContainer: {
     alignItems: "flex-start",
     left: "5%",
@@ -121,14 +120,14 @@ const styles = StyleSheet.create({
     color: "#2D3748",
   },
 
-  //estilização da caixa de texto
+  //estilização da caixa de texto "Pesquisar Localização"
   input: {
     padding: 15,
     borderRadius: 25,
     backgroundColor: "#EDF2F7",
     width: "96%",
-    marginBottom: 20,
-    marginTop: 30,
+    marginBottom: 15,
+    marginTop: 25,
     marginLeft: "2%",
   },
 
@@ -136,7 +135,7 @@ const styles = StyleSheet.create({
   btn: {
     padding: 15,
     borderRadius: 25,
-    backgroundColor: "#85AEDD",
+    backgroundColor: "#EDF2F7",
     justifyContent: "center",
     alignItems: "center",
     width: "50%",
@@ -155,21 +154,21 @@ const styles = StyleSheet.create({
 
   //Estilização do card que mostra a umidade do ar
   umidade: {
-    width: 150,
+    width: "40%",
     height: 120,
     backgroundColor: "#85AEDD",
-    borderRadius: 8,
+    borderRadius: 5,
     alignItems: "center",
     justifyContent: "center",
-    padding: 15,
+    padding: 10,
     margin: 20,
-    marginBottom: 10,
-    borderRadius: 24,
+    marginBottom: 5,
+    borderRadius: 20,
   },
 
   //Estilização do card que mostra a velocidade do vento
   vento: {
-    width: 150,
+    width: "40%",
     height: 120,
     backgroundColor: "#85AEDD",
     borderRadius: 8,
@@ -177,13 +176,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 15,
     margin: 20,
-    borderRadius: 24,
-    marginBottom: 10,
+    borderRadius: 20,
+    marginBottom: 5,
   },
 
   cartao: {
     color: "black",
-    paddingTop: 5,
+    paddingTop: 10,
     fontSize: 20,
   },
 
@@ -198,13 +197,7 @@ const styles = StyleSheet.create({
   //estilização das imagens
   wimage: {
     width: 180,
-    height: 150,
-  },
-
-  areaInputs: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    height: 160,
   },
 
   iconContainer: {
@@ -213,28 +206,6 @@ const styles = StyleSheet.create({
     left: "50%",
     marginLeft: -30,
     zIndex: 1,
-  },
-
-  //config do input
-  Input: {
-    width: "80%",
-    letterSpacing: 1,
-    borderWidth: 1,
-    borderRadius: 30,
-    padding: 10,
-    borderColor: "#000",
-    margin: 10,
-  },
-
-  //Estilização do botão de login
-  TouchableOpacity: {
-    padding: 15,
-    borderRadius: 25,
-    backgroundColor: "#85AEDD",
-    width: "50%",
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
   },
 });
 

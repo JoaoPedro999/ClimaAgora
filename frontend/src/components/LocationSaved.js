@@ -12,6 +12,7 @@ import axios from "axios";
 const LocationSaved = (props) => {
   const [savedLocations, setSavedLocations] = useState([]);
 
+  // Função da API e salvar locais
   useEffect(() => {
     const fetchLocations = async () => {
       try {
@@ -61,6 +62,7 @@ const LocationSaved = (props) => {
     fetchLocations();
   }, []);
 
+  // Definindo qual imagem aparece de acordo com o tempo
   const getWeatherIcon = (condition) => {
     switch (condition) {
       case "Clouds":
@@ -83,8 +85,10 @@ const LocationSaved = (props) => {
   };
 
   return (
+    //Drawer e navegação de rotas
     <DrawerContentScrollView {...props}>
       <DrawerItemList {...props} />
+      {/* Mostrar as localizações salvas dentro do drawer */}
       <Text style={styles.drawerSection}>Localizações Salvas</Text>
       {savedLocations.length === 0 ? (
         <Text style={styles.noLocationsText}>Nenhuma localização salva</Text>

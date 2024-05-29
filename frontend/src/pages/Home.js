@@ -12,6 +12,7 @@ const Homepage = () => {
   const [errorMsg, setErrorMsg] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  //Função para utilizar a localização do dispositivo
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -28,6 +29,7 @@ const Homepage = () => {
     })();
   }, []);
 
+  //Função da API
   useEffect(() => {
     if (!location || typeof location !== "string") return;
 
@@ -71,6 +73,7 @@ const Homepage = () => {
     fetchForecastData();
   }, [location]);
 
+  //Definindo qual imagem aparece de acordo com o clima determinado
   const WeatherImage = (condition) => {
     switch (condition) {
       case "Clouds":
@@ -92,6 +95,7 @@ const Homepage = () => {
     }
   };
 
+  //Função para mostrar as temp maximas e minimas de cada dia
   const renderForecast = () => {
     if (!forecastData) return null;
 

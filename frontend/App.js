@@ -18,6 +18,7 @@ const Drawer = createDrawerNavigator();
 export default function App() {
   const [savedLocations, setSavedLocations] = useState([]);
 
+  //API
   const addLocation = async (newLocation) => {
     try {
       const response = await axios.get(
@@ -40,6 +41,7 @@ export default function App() {
     }
   };
 
+  //Drawer chamando a página de localizações salvas
   const CustomDrawerContent = (props) => (
     <DrawerContentScrollView {...props}>
       <LocationSaved {...props} savedLocations={savedLocations} />
@@ -47,9 +49,11 @@ export default function App() {
   );
 
   return (
+    // Acionando o Drawer e navegação de rotas
     <View style={styles.container}>
       <NavigationContainer>
         <Drawer.Navigator
+          // definindo aspectos do drawer
           initialRouteName="Homepage"
           drawerContent={(props) => <CustomDrawerContent {...props} />}
           screenOptions={{
@@ -64,6 +68,7 @@ export default function App() {
           }}
         >
           <Drawer.Screen
+            // definindo aspectos do drawer
             name="Homepage"
             component={Homepage}
             options={{
@@ -74,6 +79,7 @@ export default function App() {
             }}
           />
           <Drawer.Screen
+            // definindo aspectos do drawer
             name="ClimaAgora"
             component={ClimaAgora}
             options={{
