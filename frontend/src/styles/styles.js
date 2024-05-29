@@ -20,6 +20,14 @@ const styles = StyleSheet.create({
     padding: 8,
     marginVertical: 5,
     marginHorizontal: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
 
   //Container Home/Salve sua Localização
