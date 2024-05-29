@@ -207,6 +207,10 @@ const styles = StyleSheet.create({
     marginLeft: -30,
     zIndex: 1,
   },
+
+  delete: {
+    left: "90%",
+  },
 });
 
 export default styles;

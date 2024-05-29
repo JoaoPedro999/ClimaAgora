@@ -5,10 +5,11 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import styles from "../styles/styles";
 import axios from "axios";
 import BtnComponent from "./ButtonComponent";
+import { FontAwesome } from "@expo/vector-icons";
 
 const LocationSaved = (props) => {
   const [savedLocations, setSavedLocations] = useState([]);
@@ -116,10 +117,12 @@ const LocationSaved = (props) => {
                 <Text style={styles.weatherCond}>
                   {location.weatherData.weather[0].main}
                 </Text>
-
-                <BtnComponent onPress={() => deleteLocation(location.id)}>
-                  <Text>Excluir</Text>
-                </BtnComponent>
+                <TouchableOpacity
+                  style={styles.delete}
+                  onPress={() => deleteLocation(location.id)}
+                >
+                  <FontAwesome name="trash-o" size={24} color="black" />
+                </TouchableOpacity>
               </View>
             ) : (
               <Text style={styles.loadingText}>
