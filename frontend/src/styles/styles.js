@@ -211,6 +211,10 @@ const styles = StyleSheet.create({
   delete: {
     left: "90%",
   },
+
+  noLocationsText: {
+    left: "7%",
+  },
 });
 
 export default styles;
