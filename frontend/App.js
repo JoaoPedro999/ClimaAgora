@@ -3,7 +3,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
-  DrawerItem,
 } from "@react-navigation/drawer";
 import { View } from "react-native";
 import { AntDesign, Entypo } from "@expo/vector-icons";
@@ -53,7 +52,6 @@ export default function App() {
     <View style={styles.container}>
       <NavigationContainer>
         <Drawer.Navigator
-          // definindo aspectos do drawer
           initialRouteName="Homepage"
           drawerContent={(props) => <CustomDrawerContent {...props} />}
           screenOptions={{
@@ -68,7 +66,6 @@ export default function App() {
           }}
         >
           <Drawer.Screen
-            // definindo aspectos do drawer
             name="Homepage"
             component={Homepage}
             options={{
@@ -79,7 +76,6 @@ export default function App() {
             }}
           />
           <Drawer.Screen
-            // definindo aspectos do drawer
             name="ClimaAgora"
             component={ClimaAgora}
             options={{

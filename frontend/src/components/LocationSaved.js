@@ -5,18 +5,23 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, Image } from "react-native";
 import styles from "../styles/styles";
 import axios from "axios";
 import BtnComponent from "./ButtonComponent";
 import { FontAwesome } from "@expo/vector-icons";
 
+// Componente principal que exibe as localizações salvas
 const LocationSaved = (props) => {
+  // State para armazenar as localizações salvas
   const [savedLocations, setSavedLocations] = useState([]);
 
+  // Função para deletar uma localização específica
   const deleteLocation = async (locationId) => {
     try {
+      // Deletando a localização do Firestore
       await deleteDoc(doc(db, "locations", locationId));
+      // Atualizando o state após deletar
       setSavedLocations(
         savedLocations.filter((location) => location.id !== locationId)
       );
@@ -25,9 +30,11 @@ const LocationSaved = (props) => {
     }
   };
 
+  // useEffect para buscar as localizações salvas assim que o componente é montado
   useEffect(() => {
     const fetchLocations = async () => {
       try {
+        // Buscando todas as localizações da coleção 'locations' no Firestore
         const locationsSnapshot = await getDocs(collection(db, "locations"));
         if (locationsSnapshot.empty) {
           console.log("No saved locations found");
@@ -35,10 +42,12 @@ const LocationSaved = (props) => {
         }
 
         const locations = [];
+        // Percorrendo cada documento na coleção e adicionando ao array 'locations'
         locationsSnapshot.forEach((doc) => {
           locations.push({ ...doc.data(), id: doc.id });
         });
 
+        // Atualizando as localizações com dados de clima obtidos via API
         const updatedLocations = await Promise.all(
           locations.map(async (location) => {
             try {
@@ -52,6 +61,7 @@ const LocationSaved = (props) => {
                   },
                 }
               );
+              // Retornando a localização com os dados de clima adicionados
               return {
                 ...location,
                 weatherData: response.data,
@@ -61,10 +71,11 @@ const LocationSaved = (props) => {
                 `Erro ao obter dados do clima para ${location.name}:`,
                 error
               );
-              return location;
+              return location; // Retorna a localização mesmo sem dados de clima
             }
           })
         );
+        // Atualizando o state com as localizações atualizadas
         setSavedLocations(updatedLocations);
       } catch (error) {
         console.error("Erro ao buscar localizações salvas:", error);
@@ -74,6 +85,7 @@ const LocationSaved = (props) => {
     fetchLocations();
   }, []);
 
+  // Função para obter o ícone do clima com base na condição
   const getWeatherIcon = (condition) => {
     switch (condition) {
       case "Clouds":
@@ -85,9 +97,7 @@ const LocationSaved = (props) => {
       case "Thunderstorm":
         return require("../assets/images/Thunderstorm.png");
       case "Haze":
-        return require("../assets/images/Haze.png");
       case "Fog":
-        return require("../assets/images/Haze.png");
       case "Mist":
         return require("../assets/images/Haze.png");
       default:
@@ -108,7 +118,7 @@ const LocationSaved = (props) => {
             {location.weatherData ? (
               <View style={styles.weatherInfoContainer}>
                 <Image
-                  style={[styles.weatherIcon, { width: 40, height: 40 }]}
+                  style={styles.weatherIcon}
                   source={getWeatherIcon(location.weatherData.weather[0].main)}
                 />
                 <Text style={styles.wheaterTitle}>
@@ -117,12 +127,12 @@ const LocationSaved = (props) => {
                 <Text style={styles.weatherCond}>
                   {location.weatherData.weather[0].main}
                 </Text>
-                <TouchableOpacity
-                  style={styles.delete}
+                <BtnComponent
+                  styles={styles.delete}
                   onPress={() => deleteLocation(location.id)}
                 >
                   <FontAwesome name="trash-o" size={24} color="black" />
-                </TouchableOpacity>
+                </BtnComponent>
               </View>
             ) : (
               <Text style={styles.loadingText}>

@@ -6,13 +6,13 @@ import styles from "../styles/styles";
 import moment from "moment";
 
 const Homepage = () => {
-  const [weatherData, setWeatherData] = useState(null);
-  const [location, setLocation] = useState("Nova Odessa");
-  const [forecastData, setForecastData] = useState(null);
-  const [errorMsg, setErrorMsg] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [weatherData, setWeatherData] = useState(null); // State para armazenar dados climáticos atuais
+  const [location, setLocation] = useState("Nova Odessa"); // State para armazenar o nome da localização
+  const [forecastData, setForecastData] = useState(null); // State para armazenar dados da previsão do tempo
+  const [errorMsg, setErrorMsg] = useState(null); // State para armazenar mensagens de erro
+  const [loading, setLoading] = useState(true); // State para indicar se está carregando
 
-  //Função para utilizar a localização do dispositivo
+  // Hook para identificar a localização atual do dispositivo
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -29,7 +29,7 @@ const Homepage = () => {
     })();
   }, []);
 
-  //Função da API
+  // Hook para buscar dados climáticos e da previsão do tempo
   useEffect(() => {
     if (!location || typeof location !== "string") return;
 
@@ -51,6 +51,7 @@ const Homepage = () => {
       }
     };
 
+    // Função para buscar a previsão do tempo para os próximos 5 dias
     const fetchForecastData = async () => {
       try {
         const response = await axios.get(
@@ -73,7 +74,7 @@ const Homepage = () => {
     fetchForecastData();
   }, [location]);
 
-  //Definindo qual imagem aparece de acordo com o clima determinado
+  // Função para obter o ícone do clima com base na condição
   const WeatherImage = (condition) => {
     switch (condition) {
       case "Clouds":
@@ -85,9 +86,7 @@ const Homepage = () => {
       case "Thunderstorm":
         return require("../assets/images/Thunderstorm.png");
       case "Haze":
-        return require("../assets/images/Haze.png");
       case "Fog":
-        return require("../assets/images/Haze.png");
       case "Mist":
         return require("../assets/images/Haze.png");
       default:
@@ -95,11 +94,12 @@ const Homepage = () => {
     }
   };
 
-  //Função para mostrar as temp maximas e minimas de cada dia
+  // Função para renderizar a previsão do tempo para os próximos 5 dias
   const renderForecast = () => {
     if (!forecastData) return null;
 
     const groupedForecasts = {};
+    // Agrupa a previsão do tempo por data
     forecastData.list.forEach((forecast) => {
       const date = moment(forecast.dt_txt).format("YYYY-MM-DD");
       if (!groupedForecasts[date]) {
@@ -135,6 +135,7 @@ const Homepage = () => {
     ));
   };
 
+  // Exibe um indicador de carregamento enquanto os dados estão sendo buscados
   if (loading) {
     return (
       <View style={styles.container}>
@@ -143,6 +144,7 @@ const Homepage = () => {
     );
   }
 
+  // Renderiza a interface do usuário com os dados climáticos e da previsão do tempo
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollContainer}>

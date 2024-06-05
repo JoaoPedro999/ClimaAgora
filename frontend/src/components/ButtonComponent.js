@@ -1,10 +1,8 @@
 import { TouchableOpacity } from "react-native";
-import styles from "../styles/styles";
 
-export default function BtnComponent({ onPress, children }) {
+export default function BtnComponent({ onPress, children, styles }) {
   return (
-    //Botão para salvar a localização
-    <TouchableOpacity style={styles.btn} onPress={onPress}>
+    <TouchableOpacity style={styles} onPress={onPress}>
       {children}
     </TouchableOpacity>
   );

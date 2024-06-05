@@ -8,22 +8,24 @@ import { db } from "../services/firebaseConfig";
 import { collection, addDoc } from "firebase/firestore";
 
 const WeatherComponent = ({ addLocation }) => {
-  const [weatherData, setWeatherData] = useState(null);
-  const [location, setLocation] = useState("Londres");
-  const [forecastData, setForecastData] = useState(null);
+  const [weatherData, setWeatherData] = useState(null); // State para armazenar dados climáticos atuais
+  const [location, setLocation] = useState("Londres"); // State para armazenar o nome da localização
+  const [forecastData, setForecastData] = useState(null); // State para armazenar dados da previsão do tempo
 
+  // Função para salvar uma localização no Firestore
   const saveLocation = async () => {
     try {
-      const locationsCollection = collection(db, "locations");
+      const locationsCollection = collection(db, "locations"); // Referência à coleção 'locations'
       await addDoc(locationsCollection, {
-        name: location,
+        name: location, // Adiciona o nome da localização
       });
-      addLocation(location);
+      addLocation(location); // Chama a função passada por props para adicionar a localização
     } catch (error) {
-      console.error("Erro ao salvar a localização:", error);
+      console.error("Erro ao salvar a localização:", error); // erro
     }
   };
 
+  // useEffect para buscar dados climáticos e da previsão do tempo quando a localização muda
   useEffect(() => {
     const fetchWeatherData = async () => {
       try {
@@ -37,12 +39,12 @@ const WeatherComponent = ({ addLocation }) => {
             },
           }
         );
-        setWeatherData(response.data);
+        setWeatherData(response.data); // Atualiza o state com dados climáticos
       } catch (error) {
-        console.error("Erro ao obter dados climáticos:", error);
+        console.error("Erro ao obter dados climáticos:", error); // erro
       }
     };
-
+    // Função para buscar a previsão do tempo para os próximos 5 dias
     const fetchForecastData = async () => {
       try {
         const response = await axios.get(
@@ -55,20 +57,22 @@ const WeatherComponent = ({ addLocation }) => {
             },
           }
         );
-        setForecastData(response.data);
+        setForecastData(response.data); // Atualiza o state com dados da previsão do tempo
       } catch (error) {
-        console.error("Erro ao obter dados da previsão do tempo:", error);
+        console.error("Erro ao obter dados da previsão do tempo:", error); // erro
       }
     };
 
     fetchWeatherData();
     fetchForecastData();
-  }, [location]);
+  }, [location]); // Dependência do useEffect para disparar quando 'location' muda
 
+  // Função para mudar a localização
   const LocationChange = (text) => {
     setLocation(text);
   };
 
+  // Função para obter o ícone do clima com base na condição
   const WeatherImage = (condition) => {
     switch (condition) {
       case "Clouds":
@@ -80,9 +84,7 @@ const WeatherComponent = ({ addLocation }) => {
       case "Thunderstorm":
         return require("../assets/images/Thunderstorm.png");
       case "Haze":
-        return require("../assets/images/Haze.png");
       case "Fog":
-        return require("../assets/images/Haze.png");
       case "Mist":
         return require("../assets/images/Haze.png");
       default:
@@ -90,10 +92,12 @@ const WeatherComponent = ({ addLocation }) => {
     }
   };
 
+  // Função para renderizar a previsão do tempo para os próximos 5 dias
   const renderForecast = () => {
     if (!forecastData) return null;
 
     const groupedForecasts = {};
+    // Agrupa a previsão do tempo por data
     forecastData.list.forEach((forecast) => {
       const date = moment(forecast.dt_txt).format("YYYY-MM-DD");
       if (!groupedForecasts[date]) {
@@ -160,7 +164,7 @@ const WeatherComponent = ({ addLocation }) => {
           </View>
         )}
 
-        <BtnComponent onPress={saveLocation}>
+        <BtnComponent styles={styles.btn} onPress={saveLocation}>
           <Text>Salvar Localização</Text>
         </BtnComponent>
 

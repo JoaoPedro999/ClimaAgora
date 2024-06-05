@@ -59,6 +59,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 
+  weatherIcon: {
+    width: 40,
+    height: 40,
+  },
+
   //Tabela "Previsão para os próximos dias"
   forecastContainer: {
     justifyContent: "space-between",
