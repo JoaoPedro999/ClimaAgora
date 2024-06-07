@@ -11,7 +11,6 @@ import axios from "axios";
 import BtnComponent from "./ButtonComponent";
 import { FontAwesome } from "@expo/vector-icons";
 
-// Componente principal que exibe as localizações salvas
 const LocationSaved = (props) => {
   // State para armazenar as localizações salvas
   const [savedLocations, setSavedLocations] = useState([]);
@@ -37,7 +36,7 @@ const LocationSaved = (props) => {
         // Buscando todas as localizações da coleção 'locations' no Firestore
         const locationsSnapshot = await getDocs(collection(db, "locations"));
         if (locationsSnapshot.empty) {
-          console.log("No saved locations found");
+          console.log("Nenhuma localização salva");
           return;
         }
 
@@ -97,7 +96,9 @@ const LocationSaved = (props) => {
       case "Thunderstorm":
         return require("../assets/images/Thunderstorm.png");
       case "Haze":
+        return require("../assets/images/Haze.png");
       case "Fog":
+        return require("../assets/images/Haze.png");
       case "Mist":
         return require("../assets/images/Haze.png");
       default:
